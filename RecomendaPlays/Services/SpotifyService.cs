@@ -92,7 +92,8 @@ namespace RecomendaPlays.Models
             //gerar o nome do arquivo
             String nomeArquivo = usuario.UserId + "_"+usuario.DisplayName;
             //salvar o arquivo
-           using (var sw = new StreamWriter(@"C:\Users\fran\Documents\Visual Studio 2017\Projects\RecomendaPlays\RecomendaPlays\Dados\" + nomeArquivo + "musicas.csv"))
+            string path = HttpContext.Current.Server.MapPath("~/Content/Dados/");
+            using (var sw = new StreamWriter(path + nomeArquivo + "musicas.csv"))
            {
                     var writer = new CsvWriter(sw);
                    writer.WriteRecords(metaAudios);

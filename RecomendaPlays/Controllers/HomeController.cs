@@ -101,7 +101,7 @@ namespace RecomendaPlays.Controllers
                // Post(access_token, error, playlistProntas);
                 //return View("Teste", playlistProntas);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return View("Error");
             }

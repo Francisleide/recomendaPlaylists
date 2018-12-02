@@ -63,7 +63,7 @@ namespace RecomendaPlays.Controllers
                 List<Audio> metaAudios = spotifyService.GetAudioTracks(tocadasRecentemente, spotifyUser);
                 // GeraPlayLists();
                 
-                string _dataPath = Path.Combine("C://Users//fran//Documents//Docs//225jyk7jzbguolpbmgsgq6oby_Fran Almeidamusicas.csv");
+                string _dataPath = Path.Combine("C://Users//fran//Documents//Docs//"+spotifyUser.UserId+"_"+spotifyUser.DisplayName+"musicas.csv");
                 string _dataPath2 = Path.Combine("C://Users//fran//Documents//Docs//dataSpotify.csv");
                 string _modelPath = Path.Combine("C://Users//fran//Documents//Docs//p1.zip");
                 string _modelPath2 = Path.Combine("C://Users//fran//Documents//Docs//p2.zip");

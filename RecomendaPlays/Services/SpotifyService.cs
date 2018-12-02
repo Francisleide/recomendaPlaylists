@@ -94,11 +94,11 @@ namespace RecomendaPlays.Models
                 trackML.NomeMusica = metaAudio.FullTrack.Name;
                 trackML.Speechiness = metaAudio.Speechiness;
                 tracksML.Add(trackML);
-              /*  using (var sw = new StreamWriter(@"C:\Users\fran\Documents\Docs\" + nomeArquivo + "musicas.csv"))
+                using (var sw = new StreamWriter(@"C:\Users\fran\Documents\Docs\" + nomeArquivo + "musicas.csv"))
                 {
                     var writer = new CsvWriter(sw);
                     writer.WriteRecords(tracksML);
-                }*/
+                }
             }
 
             return metaAudios;

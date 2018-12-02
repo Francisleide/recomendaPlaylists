@@ -10,8 +10,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.ML.Runtime.Api;
-using Microsoft.ML.Runtime.Data;
 using Microsoft.ML.Runtime.Learners;
+using CsvHelper;
+using Microsoft.ML.Legacy.Trainers;
+using System.Collections;
+using System.Threading.Tasks;
+
 
 namespace RecomendaPlays.Controllers
 {
@@ -62,11 +66,12 @@ namespace RecomendaPlays.Controllers
                 
                 List<Audio> metaAudios = spotifyService.GetAudioTracks(tocadasRecentemente, spotifyUser);
                 // GeraPlayLists();
-                
-                string _dataPath = Path.Combine("C://Users//fran//Documents//Docs//"+spotifyUser.UserId+"_"+spotifyUser.DisplayName+"musicas.csv");
-                string _dataPath2 = Path.Combine("C://Users//fran//Documents//Docs//dataSpotify.csv");
-                string _modelPath = Path.Combine("C://Users//fran//Documents//Docs//p1.zip");
-                string _modelPath2 = Path.Combine("C://Users//fran//Documents//Docs//p2.zip");
+                /*HttpContext.Current.Server.MapPath("~/Content/Dados/");
+            using (var sw = new StreamWriter(path + nomeArquivo + "musicas.csv"))*/
+                string _dataPath = System.Web.HttpContext.Current.Server.MapPath("~/Content/Dados/" + spotifyUser.UserId+"_"+spotifyUser.DisplayName+"musicas.csv");
+                string _dataPath2 = System.Web.HttpContext.Current.Server.MapPath("~/Content/Dados/dataSpotify.csv");
+                string _modelPath = System.Web.HttpContext.Current.Server.MapPath("~/Content/Dados/p1.zip");
+                string _modelPath2 = System.Web.HttpContext.Current.Server.MapPath("~/Content/Dados/p2.zip");
                 
                 var model1 = PredictionModel.ReadAsync<Musica, ClusterPrediction>(_modelPath).Result;
                 var model2 = PredictionModel.ReadAsync<Musica, ClusterPrediction>(_modelPath2).Result;
@@ -118,3 +123,4 @@ namespace RecomendaPlays.Controllers
 
     }
 }
+ 

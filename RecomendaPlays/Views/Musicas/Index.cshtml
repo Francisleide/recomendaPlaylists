@@ -1,0 +1,42 @@
+﻿@model IEnumerable<RecomendaPlays.Models.Musica>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Suas playlists geradas foram</h2>
+<h3>Veja suas playlists abaixo e por favor, não feche a página </h3>
+<table border="1">
+    @foreach (var musica in Model)
+    {
+    <tr>
+        <td>@musica.Titulo</td>
+        <td>@musica.Cantor</td>
+    </tr>
+        
+    }
+</table>
+<h3>Suas segunda playlist gerada: </h3>
+<table border="1">
+    @foreach (var musica in Model)
+    {
+        <tr>
+            <td>@musica.Titulo</td>
+            <td>@musica.Cantor</td>
+        </tr>
+
+    }
+</table>
+
+<h3>Sua terceira playlist gerada: </h3>
+<table border="1">
+
+    @foreach (var musica in Model)
+    {
+        <tr>
+            <td>@musica.Titulo</td>
+            <td>@musica.Cantor</td>
+        </tr>
+    }
+
+</table>

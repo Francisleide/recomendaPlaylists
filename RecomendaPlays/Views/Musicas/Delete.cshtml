@@ -1,0 +1,88 @@
+﻿@model RecomendaPlays.Models.Musica
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Musica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualCluster)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualCluster)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Speechiness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Speechiness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Liveness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Liveness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Energy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Energy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Danceability)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Danceability)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

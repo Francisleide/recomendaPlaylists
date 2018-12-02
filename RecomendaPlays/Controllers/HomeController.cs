@@ -15,24 +15,32 @@ using Microsoft.ML.Runtime.Learners;
 
 namespace RecomendaPlays.Controllers
 {
+
     public class HomeController : Controller
     {
+        private RecomendaPlaysContext db = new RecomendaPlaysContext();
         private readonly SpotifyAuthViewModel _spotifyAuthViewModel;
         private readonly ISpotifyApi _spotifyApi;
         List<PlaylistPronta> playlistProntas = new List<PlaylistPronta>();
-
+        SpotifyUser spotifyUser;
         public HomeController(SpotifyAuthViewModel spotifyAuthViewModel, ISpotifyApi spotifyApi)
         {
             _spotifyAuthViewModel = spotifyAuthViewModel;
             _spotifyApi = spotifyApi;
+           
         }
-
         public ActionResult Index()
         {
+            
             ViewBag.AuthUri = _spotifyAuthViewModel.GetAuthUri();
 
             return View();
         }
+
+      /*  public ActionResult PlayLists() {
+            ViewBag.usuario = spotifyUser.DisplayName;
+            return View(db.Musicas.Where(m => m.idUsuario.Equals(spotifyUser.UserId)).ToList());
+        }*/
 
         public ActionResult GenerateNameSortList(string access_token, string error)
         {
@@ -47,61 +55,49 @@ namespace RecomendaPlays.Controllers
                 _spotifyApi.Token = access_token;
                 SpotifyService spotifyService = new SpotifyService(_spotifyApi);
                 //Get user_id and user displayName
-                SpotifyUser spotifyUser = spotifyService.GetUserProfile();
+                spotifyUser = spotifyService.GetUserProfile();
                 ViewBag.UserName = spotifyUser.DisplayName;
 
                 Tracks tocadasRecentemente = spotifyService.GetRecentlyPlayed();
+                
                 List<Audio> metaAudios = spotifyService.GetAudioTracks(tocadasRecentemente, spotifyUser);
+                // GeraPlayLists();
                 
+                string _dataPath = Path.Combine("C://Users//fran//Documents//Docs//225jyk7jzbguolpbmgsgq6oby_Fran Almeidamusicas.csv");
+                string _dataPath2 = Path.Combine("C://Users//fran//Documents//Docs//dataSpotify.csv");
+                string _modelPath = Path.Combine("C://Users//fran//Documents//Docs//p1.zip");
+                string _modelPath2 = Path.Combine("C://Users//fran//Documents//Docs//p2.zip");
                 
+                var model1 = PredictionModel.ReadAsync<Musica, ClusterPrediction>(_modelPath).Result;
+                var model2 = PredictionModel.ReadAsync<Musica, ClusterPrediction>(_modelPath2).Result;
+                var rec = spotifyService.geraplay(_dataPath, _dataPath2, model1, model2);
+                rec.Nome = spotifyUser.DisplayName;
+                rec.IdUsuario = spotifyUser.UserId;
                 
-                
-                /*//Usando o framework ML
-                string _dataPath = Path.Combine(Environment.CurrentDirectory, "Dados", spotifyUser+"musicas.csv");
-                string _modelPath = Path.Combine(@"C:\Users\fran\Documents\Docs\" + spotifyUser.UserId + "musicasSaida.csv");
-             
-                var env = new LocalEnvironment();
-                var reader = new TextLoader(env,
-               new TextLoader.Arguments()
-               {
-                   Separator = ";",
-                   HasHeader = true,
-                   Column = new[]
-                   {
-                            new TextLoader.Column("Speechiness", DataKind.R4, 0),
-                            new TextLoader.Column("Liveness", DataKind.R4, 1),
-                            new TextLoader.Column("Energy", DataKind.R4, 2),
-                            new TextLoader.Column("Danceability", DataKind.R4, 3)
+                foreach (var musicasp1 in rec.P1)
+                {
+                    musicasp1.IdUsuario = spotifyUser.UserId;
+                   // db.Musicas.Add(musicasp1);
+                }
+                foreach (var musicasp2 in rec.P2)
+                {
+                    musicasp2.IdUsuario = spotifyUser.UserId;
+                    //db.Musicas.Add(musicasp2);
+                }
+                foreach (var musicasp3 in rec.P3)
+                {
+                    musicasp3.IdUsuario = spotifyUser.UserId;
+                    //db.Musicas.Add(musicasp3);
+                }
 
-                   }
-               });
-                IDataView trainingDataView = reader.Read(new MultiFileSource(_dataPath));
-                var pipeline = new TermEstimator(env, "Label", "Label")
-                   .Append(new ConcatEstimator(env, "Speechiness", "Liveness", "Energy", "Danceability", "PetalWidth"))
-                   .Append(new SdcaMultiClassTrainer(env, new SdcaMultiClassTrainer.Arguments()))
-                   .Append(new KeyToValueEstimator(env, "PredictedLabel"));
-
-                // STEP 4: Train your model based on the data set  
-                var model = pipeline.Fit(trainingDataView);
-
-                // var x = spotifyService.MeuK(metaAudios);
-                //  metaAudios = spotifyService.calcDistancias(metaAudios);
-
-                //playlistProntas = spotifyService.Knn(metaAudios);
-
-                /* string uriCallback = "http:%2F%2Flocalhost:12029%2FHome%2FPost";
-                 string clientId = "215f619c52da4befaa569f12a2108b41";
-                 string completo = "https://accounts.spotify.com/en/authorize?client_id=" + clientId +
-                      "&response_type=token&redirect_uri=" + uriCallback +
-                      "&state=&scope=" + Scope.PLAYLIST_MODIFY_PRIVATE.GetStringAttribute(" ") +
-                      "&show_dialog=true";
-                 ViewBag.AuthUri = completo;*/
-
-               return RedirectToAction("Create", "Usuarios");
+                // db.SaveChanges();
+                TempData["rec"] = rec;
+                return RedirectToAction("Index","Musicas");
+             //   return RedirectToAction("Playlists", rec);
                // Post(access_token, error, playlistProntas);
                 //return View("Teste", playlistProntas);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return View("Error");
             }

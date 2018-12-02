@@ -71,7 +71,7 @@ namespace RecomendaPlays.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             //It would be great to get these values from some confi, but cannot access web.config from here
-                string uriCallback = "https://recomendaplays.azurewebsites.net/Home/GenerateNameSortList";
+           string uriCallback = "https://recomendaplays.azurewebsites.net/Home/GenerateNameSortList";
             string clientId = "215f619c52da4befaa569f12a2108b41";
             kernel.Bind(typeof(ISpotifyApi)).To(typeof(SpotifyApi));
             kernel.Bind(typeof(SpotifyAuthViewModel)).To(typeof(SpotifyAuthViewModel))

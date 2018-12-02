@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RecomendaPlays.Models.Musica>
+
+<h2>Olá @ViewBag.usuario !!</h2>
+<h3>Suas primeira playlist gerada: </h3>
+<ul>
+    @foreach (var musica in Model)
+    {
+        if (musica.QualCluster == 1)
+        {
+            <li>@musica.Titulo</li>
+            <li>@musica.Cantor</li>
+        }
+
+    }
+</ul>
+<h3>Sua segunda playlist gerada: </h3>
+<ul>
+    @foreach (var musica in Model)
+    {
+        if (musica.QualCluster == 2)
+        {
+            <li>@musica.Titulo</li>
+            <li>@musica.Cantor</li>
+        }
+
+    }
+</ul>
+<h3>Sua terceira playlist gerada: </h3>
+<ul>
+    @foreach (var musica in Model)
+    {
+        if (musica.QualCluster == 3)
+        {
+            <li>@musica.Titulo</li>
+            <li>@musica.Cantor</li>
+        }
+
+    }
+</ul>

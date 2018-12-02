@@ -26,12 +26,5 @@ namespace RecomendaPlays.ML
         public double Tempo { get; set; }
         public string NomeMusica { get; set; }
     }
-    public class ClusterPrediction
-    {
-        [ColumnName("PredictedLabel")]
-        public uint PredictedClusterId;
 
-        [ColumnName("Score")]
-        public float[] Distances;
-    }
 }

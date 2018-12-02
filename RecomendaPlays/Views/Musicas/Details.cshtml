@@ -1,0 +1,82 @@
+﻿@model RecomendaPlays.Models.Musica
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Musica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QualCluster)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QualCluster)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Speechiness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Speechiness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Liveness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Liveness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Energy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Energy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Danceability)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Danceability)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MusicaId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

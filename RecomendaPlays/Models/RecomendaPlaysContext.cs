@@ -20,5 +20,7 @@ namespace RecomendaPlays.Models
         }
 
         public System.Data.Entity.DbSet<RecomendaPlays.Models.Usuario> Usuarios { get; set; }
+
+        public System.Data.Entity.DbSet<RecomendaPlays.Models.Musica> Musicas { get; set; }
     }
 }

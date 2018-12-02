@@ -10,21 +10,29 @@
 <table border="1">
     @foreach (var musica in Model)
     {
-    <tr>
-        <td>@musica.Titulo</td>
-        <td>@musica.Cantor</td>
-    </tr>
+        if(musica.QualCluster == 1)
+        {
+            <tr>
+                <td>@musica.Titulo</td>
+                <td>@musica.Cantor</td>
+            </tr>
+        }
+    
         
     }
 </table>
 <h3>Suas segunda playlist gerada: </h3>
 <table border="1">
+
     @foreach (var musica in Model)
     {
+        if (musica.QualCluster == 2)
+        {
         <tr>
             <td>@musica.Titulo</td>
             <td>@musica.Cantor</td>
         </tr>
+        }
 
     }
 </table>
@@ -34,10 +42,14 @@
 
     @foreach (var musica in Model)
     {
-        <tr>
-            <td>@musica.Titulo</td>
-            <td>@musica.Cantor</td>
-        </tr>
+        if(musica.QualCluster == 3)
+        {
+            <tr>
+                <td>@musica.Titulo</td>
+                <td>@musica.Cantor</td>
+            </tr>
+        }
+        
     }
 
 </table>

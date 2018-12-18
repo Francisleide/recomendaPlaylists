@@ -72,7 +72,7 @@ namespace RecomendaPlays.Controllers
                 string _dataPath2 = System.Web.HttpContext.Current.Server.MapPath("~/Content/Dados/dataSpotify.csv");
                 string _modelPath = System.Web.HttpContext.Current.Server.MapPath("~/Content/Dados/p1.zip");
                 string _modelPath2 = System.Web.HttpContext.Current.Server.MapPath("~/Content/Dados/p2.zip");
-                
+                string nomeArq = spotifyUser.UserId + "_" + spotifyUser.DisplayName + "musicas.csv";
                 var model1 = PredictionModel.ReadAsync<Musica, ClusterPrediction>(_modelPath).Result;
                 var model2 = PredictionModel.ReadAsync<Musica, ClusterPrediction>(_modelPath2).Result;
                 var rec = spotifyService.geraplay(_dataPath, _dataPath2, model1, model2);
@@ -97,6 +97,8 @@ namespace RecomendaPlays.Controllers
 
                 // db.SaveChanges();
                 TempData["rec"] = rec;
+                TempData["nomeArqui"] = nomeArq;
+                
                 return RedirectToAction("Index","Musicas");
              //   return RedirectToAction("Playlists", rec);
                // Post(access_token, error, playlistProntas);

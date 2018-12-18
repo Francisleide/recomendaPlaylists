@@ -18,7 +18,9 @@ namespace RecomendaPlays.Controllers
         public ActionResult Index()
         {
             Recomendacoes rec = (Recomendacoes)TempData["rec"];
-            foreach(var musica in rec.P1)
+            string nome = (string)TempData["nomeArqui"];
+            ViewBag.nomearq = nome;
+            foreach (var musica in rec.P1)
             {
                 db.Musicas.Add(musica);
             }
